@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sqlserver
+    environment:
+      SA_PASSWORD: "Quy123456@"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    restart: always
+    networks:
+      - mynetwork
+
+  webapp:
+    build: .
+    container_name: myapp
+    depends_on:
+      - sqlserver
+    ports:
+      - "8080:8080"
+    networks:
+      - mynetwork
+    # Tùy chọn: thêm lệnh wait-for-it hoặc tương tự để chờ sqlserver
+    # command: ["./wait-for-it.sh", "sqlserver:1433", "--", "câu lệnh khởi chạy app"]
+
+networks:
+  mynetwork:
+    driver: bridge
