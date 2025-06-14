@@ -25,7 +25,7 @@ public class HibernateUtil {
             properties.put(Environment.URL, "jdbc:sqlserver://localhost:1433;databaseName=duAn_DienThoai;encrypt=true;trustServerCertificate=true;");
             properties.put(Environment.USER, "sa");
             properties.put(Environment.PASS, "Quy123456@");
-            properties.put(Environment.PASS, "quy123");
+
             properties.put(Environment.SHOW_SQL, "true");
             properties.put(Environment.HBM2DDL_AUTO, "update");
             // add model
