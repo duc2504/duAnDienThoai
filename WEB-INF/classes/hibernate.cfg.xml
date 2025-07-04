@@ -1,32 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-configuration PUBLIC
-        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+    <persistence-unit name="default">
 
-<hibernate-configuration>
-    <session-factory>
-
-        <!-- JDBC Configuration -->
-        <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-        <property name="hibernate.connection.url">jdbc:sqlserver://sqlserver:1433;databaseName=duAn_DienThoai</property>
-        <property name="hibernate.connection.username">sa</property>
-        <property name="hibernate.connection.password">quy123</property>
-
-        <!-- SQL Server dialect -->
-        <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
-
-        <!-- Schema auto update -->
-        <property name="hibernate.hbm2ddl.auto">update</property>
-
-        <!-- Logging -->
-        <property name="hibernate.show_sql">true</property>
-        <property name="hibernate.format_sql">true</property>
-
-        <!-- Optional: Set timezone -->
-        <!-- <property name="hibernate.jdbc.time_zone">UTC</property> -->
-
-        <!-- Mapping các entity (nếu cần) -->
-        <!-- <mapping class="com.example.model.YourEntity"/> -->
-
-    </session-factory>
-</hibernate-configuration>
+    </persistence-unit>
+</persistence>

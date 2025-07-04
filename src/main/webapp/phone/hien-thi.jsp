@@ -497,55 +497,42 @@
                             <div class="card h-100 shadow-sm">
                                 <!-- Hiển thị ảnh từ thư mục /img -->
                                 <img src="/img/${phonevariant.phone.id}.jpg"
-                                     onerror="this.onerror=null;this.src='/img/default-phone.jpg';"
-                                     class="product-img" alt="${phonevariant.phone.name}">
+                                     onerror="this.onerror=null;this.src='/img/default-phone.jpg'"
+                                     class="product-img"
+                                     alt="${phonevariant.phone.name}">
 
                                 <div class="card-body">
                                     <h5 class="card-title product-name">${phonevariant.phone.name}</h5>
                                     <p class="card-text">
-                                        <span class="price"><fmt:formatNumber value="${phonevariant.price}"
-                                                                              type="currency"
-                                                                              currencySymbol="₫"/></span><br>
-                                        <small>Màu: ${phonevariant.color} | Pin: ${phonevariant.batteryCapacity}
-                                            mAh</small><br>
+                                        <span class="price"><fmt:formatNumber value="${phonevariant.price}" type="currency" currencySymbol="₫"/></span><br>
+                                        <small>Màu: ${phonevariant.color} | Pin: ${phonevariant.batteryCapacity} mAh</small><br>
                                         <small>Năm: ${phonevariant.releaseYear}</small><br>
-<%--                                        <span class="status-badge ${phonevariant.trangThai == 1 ? 'badge-active' : 'badge-inactive'}">--%>
-<%--                                                ${phonevariant.trangThai == 1 ? 'Còn hàng' : 'Hết hàng'}--%>
-<%--                                        </span>--%>
                                     </p>
 
                                     <div class="product-actions">
-                                        <form action="/quy/add_giohang" method="post" class="d-flex">
+                                        <form action="/quy/add_giohang" method="post">
                                             <input type="hidden" name="variantId" value="${phonevariant.variantId}">
+                                            <input value="${phonevariant.quantity}" readonly>
 
-                                            <!-- Hiển thị số lượng và không cho chỉnh sửa -->
-                                            <input value="${phonevariant.quantity}"
-                                                   class="form-control form-control-sm form-qty me-2" readonly>
-
-                                            <!-- Nút Thêm chỉ hoạt động nếu số lượng >= 1, nếu < 1 thì vô hiệu hóa -->
                                             <c:choose>
                                                 <c:when test="${phonevariant.quantity < 1}">
-                                                    <!-- Khi hết hàng, nút "Thêm" sẽ bị disabled -->
-                                                    <button type="button" class="btn btn-secondary btn-sm" disabled>🚫 Hết hàng</button>
+                                                    <button disabled>🚫 Hết hàng</button>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <!-- Khi còn hàng, nút "Thêm" bình thường -->
-                                                    <button type="submit" class="btn btn-buy btn-sm">🛒 Thêm</button>
+                                                    <button type="submit">🛒 Thêm</button>
                                                 </c:otherwise>
                                             </c:choose>
                                         </form>
                                     </div>
 
-
-                                    <div class="action-btns mt-3">
-                                        <a href="/quy/view_update?variantId=${phonevariant.variantId}"
-                                           class="btn btn-outline-primary btn-sm">✏️ Cập nhật</a>
-                                            <%--<a href="/quy/delete?variantId=${phonevariant.variantId}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa?')">🗑️ Xóa</a>--%>
+                                    <div class="action-btns">
+                                        <a href="/quy/view_update?variantId=${phonevariant.variantId}">✏️ Cập nhật</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </c:forEach>
+
                 </div>
 
 <%--                <div class="cart-buttons mt-5">--%>
@@ -615,8 +602,10 @@
         </div>
     </div>
 </footer>
+<a href="${pageContext.request.contextPath}/Message/hien-thi?toUserId=1">
+    Xem hoặc gửi tin nhắn đến User 1
+</a>
 
-<a href="/phone/chat.jsp">chat</a>
 </body>
 </html>
 

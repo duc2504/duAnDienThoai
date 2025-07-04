@@ -124,42 +124,7 @@ public class Servlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    private void loc(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-        String priceParam = request.getParameter("price");
-        String releaseYearParam = request.getParameter("releaseYear");
-        String batteryCapacityParam = request.getParameter("batteryCapacity");
-        String trangThaiParam = request.getParameter("trangThai");
 
-        BigDecimal price = null;
-        Integer releaseYear = null;
-        Integer batteryCapacity = null;
-        Integer trangThai = null;
-
-        // Chuyển các tham số sang kiểu dữ liệu tương ứng nếu có giá trị
-        if (priceParam != null && !priceParam.isEmpty()) {
-            price = new BigDecimal(priceParam);
-        }
-        if (releaseYearParam != null && !releaseYearParam.isEmpty()) {
-            releaseYear = Integer.parseInt(releaseYearParam);
-        }
-        if (batteryCapacityParam != null && !batteryCapacityParam.isEmpty()) {
-            batteryCapacity = Integer.parseInt(batteryCapacityParam);
-        }
-        if (trangThaiParam != null && !trangThaiParam.isEmpty()) {
-            trangThai = Integer.parseInt(trangThaiParam);
-        }
-
-        // Gọi hàm lọc từ repository
-        List<PhoneVariants> filteredVariants = respository_phonevariant.filterPhoneVariants(price, releaseYear, batteryCapacity, trangThai);
-
-        // Đưa danh sách sản phẩm đã lọc vào request để hiển thị trong JSP
-        request.setAttribute("phonevariants", filteredVariants);
-
-        // Chuyển tiếp kết quả sang JSP để hiển thị
-        request.getRequestDispatcher("/phone/san-pham.jsp").forward(request, response);
-
-
-    }
 
     private void SanPhamDangBan(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -218,32 +183,7 @@ public class Servlet extends HttpServlet {
         request.getRequestDispatcher("/phone/view-add.jsp").forward(request, response);
     }
 
-//    private void hienthi_giohang(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        HttpSession session = request.getSession();
-//        Users user = (Users) session.getAttribute("user");
-//
-//        if (user == null) {
-//            // Nếu người dùng chưa đăng nhập, chuyển hướng đến trang login
-//            response.sendRedirect("/login.jsp");
-//            return;
-//        }
-//
-//        // Tìm giỏ hàng của người dùng
-//        GioHang gioHang = respository_giohang.findByUserIdAndTrangThai(user.getId());  // Giỏ hàng có trạng thái 2 (có sản phẩm)
-//        if (gioHang == null) {
-//            // Nếu giỏ hàng không tồn tại hoặc chưa có sản phẩm, thông báo cho người dùng
-//            request.setAttribute("message", "Giỏ hàng của bạn đang trống.");
-//        } else {
-//            // Nếu giỏ hàng đã có sản phẩm, lấy danh sách chi tiết giỏ hàng
-//            List<GioHangChiTiet> chiTietGioHang = respository_giohangchitiet.getAllByGioHang(gioHang.getId());
-//            request.setAttribute("gioHang", gioHang);
-//            request.setAttribute("chiTietGioHang", chiTietGioHang);
-//        }
-//
-//        // Chuyển đến trang hiển thị giỏ hàng
-//        request.getRequestDispatcher("/phone/giohang.jsp").forward(request, response);
-//
-//    }
+
 
     private void hienthi_giohang(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -347,11 +287,8 @@ public class Servlet extends HttpServlet {
             add_donhang(request, response);
         }
 
-                else if (uri.equals("/quy/update_don_hang")) {
+        else if (uri.equals("/quy/update_don_hang")) {
             update_don_hang(request, response);
-        }
-        else if (uri.equals("/quy/loc")) {
-            loc(request, response);
         }
 
 

@@ -2,6 +2,8 @@ package Model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 
 @Entity
 @Table(name = "users")
@@ -21,6 +23,14 @@ public class Users {
     @ManyToOne
     @JoinColumn(name = "id_roles")
     private Role role;
+
+
+    @OneToMany(mappedBy = "fromUser")
+    private List<Message> messagesSent;
+
+    // Danh sách tin nhắn nhận được
+    @OneToMany(mappedBy = "toUser")
+    private List<Message> messagesReceived;
 
     public Users() {
     }
